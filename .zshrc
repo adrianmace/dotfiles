@@ -70,3 +70,6 @@ function denter() {
  docker exec -it $1 bash
  return 0
 }
+
+# Initiate zoxide
+eval "$(zoxide init zsh)"
