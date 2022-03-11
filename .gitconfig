@@ -1,6 +1,10 @@
 [user]
-  name = Jeff Geerling
-  email = geerlingguy@mac.com
+  name = Adrian Mace
+  email = adrianmace@gmail.com
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+[url "ssh://git@bitbucket.org/"]
+  insteadOf = https://bitbucket.org/
 [core]
   editor = vi
   excludesfile = ~/.gitignore
@@ -10,8 +14,10 @@
   diff = auto
   interactive = auto
   status = auto
+[fetch]
+	prune = true
 [init]
-  defaultBranch = master
+  defaultBranch = main
 [web]
   browser = google-chrome
 [credential]
