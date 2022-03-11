@@ -50,7 +50,13 @@ alias gcam='git commit -am'
 alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 
 # Initiate zsh-completions
-FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+export FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+# Initiate zsh-autosuggestions
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# Initiate zsh-syntax-highlighting
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # Completions.
 autoload -Uz compinit && compinit
