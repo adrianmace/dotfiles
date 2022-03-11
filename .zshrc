@@ -18,8 +18,14 @@ export PS1=$'\n'"%F{green} %*%F %F{grey}%3~ %F{white}"$'\n'"$ "
 # Enable plugins.
 plugins=(git brew history kubectl zsh-autosuggestions zsh-completions zsh-syntax-highlighting history-substring-search)
 
+# Find architecture-specific brew path(s)
+if type brew &>/dev/null; then
+    brew_dir="$(brew --prefix)"
+    share_path="$brew_dir/share"
+fi
+
 # Custom $PATH with extra locations.
-export PATH=$HOME/Library/Python/3.8/bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:/usr/local/git/bin:$PATH
+export PATH="$HOME/Library/Python/3.8/bin:$brew_dir/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:/usr/local/git/bin:$brew_dir/opt/gnu-sed/libexec/gnubin:$PATH"
 
 # Bash-style time output.
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
@@ -28,13 +34,6 @@ export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 if [ -f ~/.aliases ]
 then
   source ~/.aliases
-fi
-
-# Set architecture-specific brew share path.
-if type brew &>/dev/null; then
-    share_path="$(brew --prefix)/share"
-else
-    echo "Brew is not installed."
 fi
 
 # Allow history search via up/down keys.
@@ -50,13 +49,13 @@ alias gcam='git commit -am'
 alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 
 # Initiate zsh-completions
-export FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+export FPATH="$brew_dir/share/zsh-completions:$FPATH"
 
 # Initiate zsh-autosuggestions
-source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$brew_dir/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Initiate zsh-syntax-highlighting
-source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$brew_dir/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # Completions.
 autoload -Uz compinit && compinit

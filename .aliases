@@ -1,1 +1,1 @@
-# .gitkeep
+alias ls='lsd'
