@@ -1,7 +1,7 @@
 #
 # .zshrc
 #
-# @author Jeff Geerling
+# @author Jeff Geerling & Adrian Mace
 #
 
 # Colors.
@@ -16,7 +16,7 @@ unsetopt nomatch
 export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
 
 # Enable plugins.
-plugins=(git brew history kubectl history-substring-search)
+plugins=(git brew history kubectl zsh-autosuggestions zsh-completions zsh-syntax-highlighting history-substring-search)
 
 # Custom $PATH with extra locations.
 export PATH=$HOME/Library/Python/3.8/bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:/usr/local/git/bin:$HOME/.composer/vendor/bin:$PATH
@@ -31,13 +31,10 @@ then
 fi
 
 # Set architecture-specific brew share path.
-arch_name="$(uname -m)"
-if [ "${arch_name}" = "x86_64" ]; then
-    share_path="/usr/local/share"
-elif [ "${arch_name}" = "arm64" ]; then
-    share_path="/opt/homebrew/share"
+if type brew &>/dev/null; then
+    share_path="$(brew --prefix)/share"
 else
-    echo "Unknown architecture: ${arch_name}"
+    echo "Brew is not installed."
 fi
 
 # Allow history search via up/down keys.
