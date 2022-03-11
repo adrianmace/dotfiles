@@ -1,1 +1,13 @@
+# Replace ls with lsd (requires lsd)
 alias ls='lsd'
+alias ll='lsd -lah'
+
+# Replaces cat with bat (requires bat)
+alias cap='bat -p'
+alias cat='bat'
+
+# Always start code in a new window
+alias code='code -n'
+
+# Extracts digest out of multi-arch manifests
+alias manifest-digest="docker inspect --format='{{index .RepoDigests 0}}'"
