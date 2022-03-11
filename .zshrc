@@ -89,7 +89,11 @@ function clone () {
 }
 
 # Initiate fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [[ ! "$PATH" == "*$brew_dir/opt/fzf/bin*" ]]; then
+  export PATH="${PATH:+${PATH}:}$brew_dir/opt/fzf/bin"
+fi
+[[ $- == *i* ]] && source "$brew_dir/opt/fzf/shell/completion.zsh" 2> /dev/null
+source "$brew_dir/opt/fzf/shell/key-bindings.zsh"
 
 # Initiate zoxide
 eval "$(zoxide init zsh)"
