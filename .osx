@@ -75,15 +75,13 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
 
-# Trackpad: Haptic feedback (light, silent clicking)
-defaults write com.apple.AppleMultitouchTrackpad FirstClickThreshold -int 0
-defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0
+# Trackpad: Haptic feedback (light)
+defaults write com.apple.AppleMultitouchTrackpad FirstClickThreshold -int 1
 
 # Trackpad: map bottom right corner to right-click (requires restart!)
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
-defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 2
-defaults write NSGlobalDomain ContextMenuGesture -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 0
 
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
@@ -153,6 +151,9 @@ defaults write NSGlobalDomain com.apple.springing.delay -float 0.1
 # Avoid creating .DS_Store files on network volumes and USBs
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Enable stacks that are grouped by Kind on the desktop
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:GroupBy Kind" ~/Library/Preferences/com.apple.finder.plist
 
 # Enable snap-to-grid for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
