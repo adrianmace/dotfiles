@@ -19,7 +19,7 @@ export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
 plugins=(git brew history kubectl zsh-autosuggestions zsh-completions zsh-syntax-highlighting history-substring-search)
 
 # Custom $PATH with extra locations.
-export PATH=$HOME/Library/Python/3.8/bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:/usr/local/git/bin:$HOME/.composer/vendor/bin:$PATH
+export PATH=$HOME/Library/Python/3.8/bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:/usr/local/git/bin:$PATH
 
 # Bash-style time output.
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
@@ -79,6 +79,9 @@ function clone () {
     git checkout $([ -f .git/refs/heads/main ] && echo main || echo master)
     git pull
 }
+
+# Initiate fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Initiate zoxide
 eval "$(zoxide init zsh)"
