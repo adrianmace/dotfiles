@@ -68,5 +68,17 @@ function denter() {
  return 0
 }
 
+# Smarter git clone function (for HTTPS URLs only)
+function clone () {
+    sanitised=$(echo $1 | cut -d '/' -f-5) 
+    folder=$(echo $sanitised | cut -d '/' -f 4) 
+    repo=$(echo $sanitised | cut -d '/' -f 5) 
+    mkdir -p ~/code/$folder && cd ~/code/$folder
+    git clone $sanitised 2> /dev/null
+    cd ~/code/$folder/$repo
+    git checkout $([ -f .git/refs/heads/main ] && echo main || echo master)
+    git pull
+}
+
 # Initiate zoxide
 eval "$(zoxide init zsh)"
